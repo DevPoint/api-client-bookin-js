@@ -8,3 +8,5 @@ class BookInCacheDispatcherFactory extends CacheDispatcherFactory {
         return cacheDispatchers;
     }
 }
+
+export default BookInCacheDispatcherFactory;

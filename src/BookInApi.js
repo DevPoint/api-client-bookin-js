@@ -18,3 +18,5 @@ class BookInApi extends Api {
         return new BookInCacheDispatcherFactory();
     }
 }
+
+export default BookInApi;

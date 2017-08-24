@@ -71,3 +71,5 @@ class BookInApiClient extends ApiClient {
         return this._api.views().find(viewId);
     }
 }
+
+export default BookInApiClient;
