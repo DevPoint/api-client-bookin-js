@@ -67,3 +67,6 @@ class Hotel extends ObservableObject {
         return this._website;
     }
 }
+
+
+export default Hotel;
