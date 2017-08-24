@@ -73,5 +73,4 @@ class Hotel extends ObservableObject {
     }
 }
 
-
 export default Hotel;

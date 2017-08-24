@@ -20,5 +20,3 @@ class Accommodation extends BaseTerm {
 }
 
 export default Accommodation;
-
-export default Booking;
