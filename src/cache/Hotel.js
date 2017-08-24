@@ -3,7 +3,8 @@ import { ObservableObject } from 'api-client-core';
 
 class Hotel extends ObservableObject { 
 
-    constructor() {
+    constructor(id) {
+        this._id = id;
         this._name = '';
         this._street = '';
         this._city = '';
@@ -11,6 +12,10 @@ class Hotel extends ObservableObject {
         this._email = '';
         this._phone = '';
         this._website = '';
+    }
+
+    get id() {
+        return this._id;
     }
 
     set name(value) {

@@ -3,9 +3,9 @@ import { ObservableObject } from 'api-client-core';
 
 class BaseTerm extends ObservableObject { 
 
-    constructor() {
-        this._id = null;
-        this._hotel_id = null;
+    constructor(id, hotel_id) {
+        this._id = id;
+        this._hotel_id = hotel_id;
         this._slug = '';
         this._name = '';
         this._description = '';
@@ -13,18 +13,8 @@ class BaseTerm extends ObservableObject {
         this._locked = false;
     }
 
-    set id(value) {
-        this._id = value;
-        this._markAsChanged()
-    }
-
     get id() {
         return this._id;
-    }
-
-    set hotel_id(value) {
-        this._hotel_id = value;
-        this._markAsChanged()
     }
 
     get hotel_id() {

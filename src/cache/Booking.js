@@ -3,9 +3,9 @@ import { ObservableObject } from 'api-client-core';
 
 class Booking extends ObservableObject { 
 
-    constructor() {
-        this._id = null;
-        this._hotel_id = null;
+    constructor(id, hotel_id) {
+        this._id = id;
+        this._hotel_id = hotel_id;
         this._enquiry_id = null;
         this._state = '';
         this._arrival = null;
@@ -30,18 +30,8 @@ class Booking extends ObservableObject {
         this._guests = [];
     }
 
-    set id(value) {
-        this._id = value;
-        this._markAsChanged()
-    }
-
     get id() {
         return this._id;
-    }
-
-    set hotel_id(value) {
-        this._hotel_id = value;
-        this._markAsChanged()
     }
 
     get hotel_id() {

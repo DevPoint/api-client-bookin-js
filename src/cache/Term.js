@@ -4,9 +4,14 @@ import BaseTerm from './BaseTerm';
 
 class Term extends BaseTerm { 
 
-    constructor() {
+    constructor(id, hotel_id, taxonomy) {
+        super(id, hotel_id);
+        this._taxonomy = taxonomy;
         this._parent_id = null;
-        this._taxonomy = '';
+    }
+
+    get taxonomy() {
+        return this._taxonomy;
     }
 
     set parent_id(value) {
@@ -16,15 +21,6 @@ class Term extends BaseTerm {
 
     get parent_id() {
         return this._parent_id;
-    }
-
-    set taxonomy(value) {
-        this._taxonomy = value;
-        this._markAsChanged()
-    }
-
-    get taxonomy() {
-        return this._taxonomy;
     }
 }
 

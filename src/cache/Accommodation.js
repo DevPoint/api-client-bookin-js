@@ -4,7 +4,8 @@ import BaseTerm from './BaseTerm';
 
 class Accommodation extends BaseTerm { 
 
-    constructor() {
+    constructor(hotel_id, id) {
+        super(hotel_id, id);
         this._room = null;
     }
 
