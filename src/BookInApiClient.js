@@ -1,5 +1,7 @@
 
-class ApiClient {
+import { ApiClient } from 'api-client-core';
+
+class BookInApiClient extends ApiClient {
 
     constructor(api) {
         this._api = api;
