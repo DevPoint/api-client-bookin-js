@@ -114,13 +114,12 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._buildApiLoadUrl(apiHost, itemId, '');
     }
 
-    insert(transactionId, data) {
-        const apiHost = this._api.getHost();
+    _insert(transactionId, data, apiInsertUrl) {
         const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         this._api.dispatch(this._api.insertStart(transactionId, this._itemType, data));
         return http({
             method: 'POST', 
-            url: this._buildApiInsertUrl(apiHost), 
+            url: apiInsertUrl, 
             headers: apiHeaders,
             data: data,
             withCredentials: false
@@ -140,13 +139,12 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
-    update(transactionId, itemId, data) {
-        const apiHost = this._api.getHost();
+    _update(transactionId, itemId, data, apiUpdateUrl) {
         const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         this._api.dispatch(this._api.updateStart(transactionId, this._itemType, itemId, data));
         return http({
             method: 'PUT', 
-            url: this._buildApiUpdateUrl(apiHost, itemId), 
+            url: apiUpdateUrl, 
             headers: apiHeaders,
             data: data,
             withCredentials: false
@@ -165,9 +163,29 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
-    load(viewId, itemId, eagerType) {
-        const apiHost = this._api.getHost();
-        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
+    _delete(transactionId, itemId, apiDeleteUrl) {
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        this._api.dispatch(this._api.deleteStart(transactionId, this._itemType, itemId));
+        return http({
+            method: 'DELETE', 
+            url: apiDeleteUrl, 
+            headers: apiHeaders,
+            withCredentials: false
+        }).then(response => {
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.removeCacheEntry(this._itemType, itemId));
+            const result = this._api.dispatch(this._api.deleteSucceeded(transactionId));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            const { errors, validationErrors } = errorResponse.data;
+            return this._api.dispatch(this._api.deleteFailed(
+                transactionId, errors
+            ));
+        });
+    }
+
+    _load(viewId, itemId, eagerType, apiLoadUrl) {
         this._api.dispatch(this._api.loadingStart(viewId, this._itemType, {
             eagerType: eagerType ? eagerType : 'full',
             offset: 0,
@@ -175,7 +193,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
             pageSize: 0}));
         return http({
             method: 'GET', 
-            url: this._buildApiLoadUrl(apiHost, itemId, apiParamsStr)
+            url: apiLoadUrl
         }).then(response => {
             const cacheEntry = response.data.cacheEntry;
             this._api.beginDispatch();
@@ -192,7 +210,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
-    loadMany(viewId, builder) {
+    _loadMany(viewId, apiLoadManyUrl) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
         this._api.dispatch(this._api.loadingStart(viewId, this._itemType, {
@@ -202,7 +220,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
             pageSize: builder.pageSize}));
         return http({
             method: 'GET', 
-            url: this._buildApiLoadManyUrl(apiHost, apiParamsStr)
+            url: apiLoadManyUrl
         }).then(response => {
             const cacheEntrys = response.data.cacheEntrys;
             this._api.beginDispatch();
@@ -217,6 +235,40 @@ class CacheEntryClient extends BaseCacheEntryClient {
                 viewId, errorResponse.data.error
             ));
         });
+    }
+
+    insert(transactionId, data) {
+        const apiHost = this._api.getHost();
+        const apiInsertUrl = this._buildApiInsertUrl(apiHost);
+        return this._insert(transactionId, data, apiInsertUrl);
+    }
+
+    update(transactionId, itemId, data) {
+        const apiHost = this._api.getHost();
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        const apiUpdateUrl = this._buildApiUpdateUrl(apiHost, itemId);
+        return this._update(transactionId, itemId, data, apiUpdateUrl);
+    }
+
+    delete(transactionId, itemId) {
+        const apiHost = this._api.getHost();
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        const apiDeleteUrl = this._buildApiDeleteUrl(apiHost, itemId);
+        return this._delete(transactionId, itemId, apiDeleteUrl);
+    }
+
+    load(viewId, itemId, eagerType) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
+        const apiLoadUrl = this._buildApiLoadUrl(apiHost, itemId, apiParamsStr);
+        return this._load(viewId, itemId, eagerType, apiLoadUrl);
+    }
+
+    loadMany(viewId, builder) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
+        const apiLoadManyUrl = this._buildApiLoadManyUrl(apiHost, apiParamsStr);
+        return this._loadMany(viewId, apiLoadManyUrl);
     }
 }
 
