@@ -3,12 +3,6 @@ import { CacheEntryClient as BaseCacheEntryClient } from 'api-client-core';
 
 class CacheEntryClient extends BaseCacheEntryClient {
 
-    /**
-     * Pluck ids from cache entries
-     *
-     * @param  {array}  cacheEntries
-     * @return {array}
-     */
     _getCacheEntriesIds(cacheEntries) {
         return cacheEntries.map(cacheEntry => cacheEntry.id);
     }
