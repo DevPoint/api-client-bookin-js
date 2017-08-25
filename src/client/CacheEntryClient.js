@@ -4,12 +4,15 @@ import { CacheEntryClient as BaseCacheEntryClient } from 'api-client-core';
 class CacheEntryClient extends BaseCacheEntryClient {
 
     /**
-     * Append filters to api params string
+     * Pluck ids from cache entries
      *
-     * @param  {string} paramsStr
-     * @param  {array}  filters
-     * @return {string}
+     * @param  {array}  cacheEntries
+     * @return {array}
      */
+    _getCacheEntriesIds(cacheEntries) {
+        return cacheEntries.map(cacheEntry => cacheEntry.id);
+    }
+
     _appendApiFiltersStr(paramsStr, filters) {
         let paramsStr = paramsStr || '';
         if (filters && filters.length) {
@@ -19,13 +22,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append search string to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {string} q
-     * @return {string}
-     */
     _appendApiSearchStr(paramsStr, q) {
         let paramsStr = paramsStr || '';
         if (q && q.length) {
@@ -35,13 +31,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append lang to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {string} lang
-     * @return {string}
-     */
     _appendApiLangStr(paramsStr, lang) {
         let paramsStr = paramsStr || '';
         if (lang && lang.length) {
@@ -51,13 +40,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append limit to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {string} limit
-     * @return {string}
-     */
     _appendApiLimitStr(paramsStr, limit) {
         let paramsStr = paramsStr || '';
         if (limit && limit.length) {
@@ -67,13 +49,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append sort fields and order to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {array}  sortBy
-     * @return {string}
-     */
     _appendApiSortByStr(paramsStr, sortBy) {
         let paramsStr = paramsStr || '';
         if (sortBy && sortBy.length) {
@@ -83,13 +58,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append included fields to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {array}  fields
-     * @return {string}
-     */
     _appendApiFieldsStr(paramsStr, fields) {
         let paramsStr = paramsStr || '';
         if (fields && fields.length) {
@@ -99,13 +67,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Append token to api params string
-     *
-     * @param  {string} paramsStr
-     * @param  {string} token
-     * @return {string}
-     */
     _appendApiTokenStr(paramsStr, token) {
         let paramsStr = paramsStr || '';
         if (token && token.length) {
@@ -115,18 +76,123 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return paramsStr;
     }
 
-    /**
-     * Build HTTP header for API call
-     *
-     * @param  {string} token
-     * @return {object}
-     */
     _buildApiHeaders(token) {
         const headers = {};
         if (token && token.length) {
             headers['Authorization'] = 'Bearer ' + token;
         }
         return headers;
+    }
+
+    _buildApiLoadParamsStr(itemId, eagerType) {
+        let apiParamsStr = '';
+        apiParamsStr += this._appendApiTokenStr(apiParamsStr, this._api.getAuthToken());
+        return apiParamsStr;
+    }
+
+    _buildApiLoadUrl(itemId, paramsStr) {
+        return '';
+    }
+
+    _buildApiLoadManyParamsStr(builder) {
+        let apiParamsStr = '';
+        apiParamsStr += this._appendApiTokenStr(apiParamsStr, this._api.getAuthToken());
+        return apiParamsStr;
+    }
+
+    _buildApiLoadManyUrl(paramsStr) {
+        return '';
+    }
+
+    _buildApiUpdateUrl(apiHost, itemId) {
+        return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
+    _buildApiInsertUrl(apiHost, itemId) {
+        return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
+    _buildApiDeleteUrl(apiHost, itemId) {
+        return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
+    update(transactionId, itemId, data) {
+        const apiHost = this._api.getHost();
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        this._api.dispatch(this._api.updateStart(transactionId, this._itemType, itemId, data));
+        return http({
+            method: 'PUT', 
+            url: this._buildApiUpdateUrl(apiHost, itemId), 
+            headers: apiHeaders,
+            data: data,
+            withCredentials: false
+        }).then(response => {
+            const cacheEntry = response.data.cacheEntry;
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
+            const result = this._api.dispatch(this._api.updateSucceeded(transactionId));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            const { errors, validationErrors } = errorResponse.data;
+            return this._api.dispatch(this._api.updateFailed(
+                transactionId, errors, validationErrors
+            ));
+        });
+    }
+
+    load(viewId, itemId, eagerType) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
+        this._api.dispatch(this._api.loadingStart(viewId, this._itemType, {
+            eagerType: eagerType ? eagerType : 'full',
+            offset: 0,
+            count: 1,       
+            pageSize: 0}));
+        return http({
+            method: 'GET', 
+            url: this._buildApiLoadUrl(apiHost, itemId, apiParamsStr)
+        }).then(response => {
+            const cacheEntry = response.data.cacheEntry;
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
+            const result = this._api.dispatch(this._api.loadingSucceeded(
+                viewId, [itemId], { totalCount: 1 }
+            ));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            return this._api.dispatch(this._api.loadingFailed(
+                viewId, errorResponse.data.error
+            ));
+        });
+    }
+
+    loadMany(viewId, builder) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
+        this._api.dispatch(this._api.loadingStart(viewId, this._itemType, {
+            eagerType: builder.eagerType,
+            offset: builder.offset,
+            count: builder.count,
+            pageSize: builder.pageSize}));
+        return http({
+            method: 'GET', 
+            url: this._buildApiLoadManyUrl(apiHost, apiParamsStr)
+        }).then(response => {
+            const cacheEntrys = response.data.cacheEntrys;
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.setCacheEntries(this._itemType, cacheEntrys));
+            const result = this._api.dispatch(this._api.loadingSucceeded(
+                viewId, this._getCacheEntriesIds(cacheEntrys), { totalCount: cacheEntrys.length }
+            ));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            return this._api.dispatch(this._api.loadingFailed(
+                viewId, errorResponse.data.error
+            ));
+        });
     }
 }
 
