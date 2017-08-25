@@ -1,10 +1,10 @@
 
-import BookInCacheEntryDispatcher from './BookInCacheEntryDispatcher';
+import CacheEntryDispatcher from './CacheEntryDispatcher';
 import Accommodation from './Accommodation';
 
 const assign = Object.assign;
 
-class AccommodationDispatcher extends BookInCacheEntryDispatcher {
+class AccommodationDispatcher extends CacheEntryDispatcher {
 
     constructor() {
         this._arrayPropsKeys = [];

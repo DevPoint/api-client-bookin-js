@@ -1,0 +1,2 @@
+
+export HotelClient from './HotelClient';

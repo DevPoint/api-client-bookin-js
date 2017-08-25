@@ -2,7 +2,7 @@
 import Api, { CacheMap } from 'api-client-core';
 import BookInApiClient from './BookInApiClient';
 import BookInApiDispatcher from './BookInApiDispatcher';
-import { BookInCacheDispatcherFactory } from './cache';
+import { CacheDispatcherFactory } from './cache';
 
 class BookInApi extends Api {
 
@@ -27,7 +27,7 @@ class BookInApi extends Api {
     }
 
     _createCacheDispatcherFactory() {
-        return new BookInCacheDispatcherFactory();
+        return new CacheDispatcherFactory();
     }
 }
 

@@ -1,8 +1,8 @@
 
-import BookInCacheEntryDispatcher from './BookInCacheEntryDispatcher';
+import CacheEntryDispatcher from './CacheEntryDispatcher';
 import Hotel from './Hotel';
 
-class HotelDispatcher extends BookInCacheEntryDispatcher {
+class HotelDispatcher extends CacheEntryDispatcher {
 
     constructor() {
         this._arrayPropsKeys = [

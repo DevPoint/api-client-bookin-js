@@ -1,7 +1,7 @@
 
 const assign = Object.assign;
 
-class BookInCacheEntryDispatcher  {
+class CacheEntryDispatcher  {
 
     _cloneObject(object) {
         return assign({}, object);
@@ -52,4 +52,4 @@ class BookInCacheEntryDispatcher  {
     }
 }
 
-export default BookInCacheEntryDispatcher;
+export default CacheEntryDispatcher;

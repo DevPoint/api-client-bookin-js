@@ -1,8 +1,8 @@
 
-import BookInCacheEntryDispatcher from './BookInCacheEntryDispatcher';
+import CacheEntryDispatcher from './CacheEntryDispatcher';
 import Term from './Term';
 
-class TermDispatcher extends BookInCacheEntryDispatcher {
+class TermDispatcher extends CacheEntryDispatcher {
 
     _createCacheEntry(payload) {
         return new Term(payload.id, payload.hotel_id, payload.taxonomy);
