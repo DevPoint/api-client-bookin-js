@@ -1,11 +1,13 @@
 
 import { ApiClient } from 'api-client-core';
+import { HotelClient } from './client';
 
 class BookInApiClient extends ApiClient {
 
-    constructor(api) {
-        this._api = api;
-        this._cacheEntryClients = this._createCacheEntryClients(api);
+    _createCacheEntryClients(api) {
+        return {
+            'hotel': new HotelClient(api)
+        };
     }
 
     loginTransaction(transactionId, credentials) {
