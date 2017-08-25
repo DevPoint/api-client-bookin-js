@@ -29,6 +29,14 @@ class BookInApi extends Api {
     _createCacheDispatcherFactory() {
         return new CacheDispatcherFactory();
     }
+
+    getHost() {
+        return '';
+    }
+
+    getAuthToken() {
+        return '';
+    }
 }
 
 export default BookInApi;

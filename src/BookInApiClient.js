@@ -1,5 +1,6 @@
 
 import { ApiClient } from 'api-client-core';
+import http from 'axios';
 import { HotelClient } from './client';
 
 class BookInApiClient extends ApiClient {
