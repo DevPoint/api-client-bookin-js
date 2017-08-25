@@ -1,8 +1,8 @@
 
-import BookInCacheDispatcher from './BookInCacheDispatcher';
+import BookInCacheEntryDispatcher from './BookInCacheEntryDispatcher';
 import Hotel from './Hotel';
 
-class HotelDispatcher extends BookInCacheDispatcher {
+class HotelDispatcher extends BookInCacheEntryDispatcher {
 
     constructor() {
         this._arrayPropsKeys = [
@@ -10,8 +10,8 @@ class HotelDispatcher extends BookInCacheDispatcher {
             'titles', 'rooms', 'seasons'];
     }
 
-    _createCacheEntry(action) {
-        return new Hotel(action.itemId);
+    _createCacheEntry(payload) {
+        return new Hotel(payload.id);
     }
 
     _updateCacheEntry(cacheEntry, payload) {

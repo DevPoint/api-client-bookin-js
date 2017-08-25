@@ -1,17 +1,17 @@
 
 import BookInCacheEntryDispatcher from './BookInCacheEntryDispatcher';
-import Booking from './Booking';
+import Accommodation from './Accommodation';
 
 const assign = Object.assign;
 
-class BookingDispatcher extends BookInCacheEntryDispatcher {
+class AccommodationDispatcher extends BookInCacheEntryDispatcher {
 
     constructor() {
-        this._arrayPropsKeys = ['accommodations', 'guests'];
+        this._arrayPropsKeys = [];
     }
 
     _createCacheEntry(payload) {
-        return new Booking(payload.id, payload.hotel_id);
+        return new Accommodation(payload.id, payload.hotel_id);
     }
 
     _updateCacheEntry(cacheEntry, payload) {
@@ -26,4 +26,4 @@ class BookingDispatcher extends BookInCacheEntryDispatcher {
     }
 }
 
-export default BookingDispatcher;
+export default AccommodationDispatcher;

@@ -1,5 +1,5 @@
 
-import Api from 'api-client-core';
+import Api, { CacheMap } from 'api-client-core';
 import BookInApiClient from './BookInApiClient';
 import BookInApiDispatcher from './BookInApiDispatcher';
 import { BookInCacheDispatcherFactory } from './cache';
@@ -7,7 +7,19 @@ import { BookInCacheDispatcherFactory } from './cache';
 class BookInApi extends Api {
 
     _createCaches() {
-        return {};
+        return {
+            'accommodation' => new CacheMap(),
+            'booking' => new CacheMap(),
+            'hotel' => new CacheMap(),
+            'invoice' => new CacheMap(),
+            'offer' => new CacheMap(),
+            'payment' => new CacheMap(),
+            'room' => new CacheMap(),
+            'roomprice' => new CacheMap(),
+            'season' => new CacheMap(),
+            'term' => new CacheMap(),
+            'user' => new CacheMap(),
+        };
     }
 
     _createClient() {
