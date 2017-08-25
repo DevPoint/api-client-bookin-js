@@ -213,3 +213,5 @@ class Booking extends ObservableObject {
         return this._guests;
     }
 }
+
+export default Booking;
