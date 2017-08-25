@@ -3,6 +3,10 @@ import { CacheEntryClient as BaseCacheEntryClient } from 'api-client-core';
 
 class CacheEntryClient extends BaseCacheEntryClient {
 
+    _getCacheEntryId(cacheEntry) {
+        return cacheEntry.id;
+    }
+
     _getCacheEntriesIds(cacheEntries) {
         return cacheEntries.map(cacheEntry => cacheEntry.id);
     }
@@ -94,7 +98,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return apiParamsStr;
     }
 
-    _buildApiLoadManyUrl(paramsStr) {
+    _buildApiLoadManyUrl(apiHost, paramsStr) {
         return '';
     }
 
@@ -102,12 +106,38 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._buildApiLoadUrl(apiHost, itemId, '');
     }
 
-    _buildApiInsertUrl(apiHost, itemId) {
-        return this._buildApiLoadUrl(apiHost, itemId, '');
+    _buildApiInsertUrl(apiHost) {
+        return this._buildApiLoadManyUrl(apiHost, '');
     }
 
     _buildApiDeleteUrl(apiHost, itemId) {
         return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
+    insert(transactionId, data) {
+        const apiHost = this._api.getHost();
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        this._api.dispatch(this._api.insertStart(transactionId, this._itemType, data));
+        return http({
+            method: 'POST', 
+            url: this._buildApiInsertUrl(apiHost), 
+            headers: apiHeaders,
+            data: data,
+            withCredentials: false
+        }).then(response => {
+            const cacheEntry = response.data.cacheEntry;
+            const itemId = this._getCacheEntryId(cacheEntry);
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
+            const result = this._api.dispatch(this._api.insertSucceeded(transactionId, itemId));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            const { errors, validationErrors } = errorResponse.data;
+            return this._api.dispatch(this._api.insertFailed(
+                transactionId, errors, validationErrors
+            ));
+        });
     }
 
     update(transactionId, itemId, data) {
