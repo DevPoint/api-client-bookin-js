@@ -2,8 +2,6 @@
 import CacheEntryDispatcher from './CacheEntryDispatcher';
 import Accommodation from './Accommodation';
 
-const assign = Object.assign;
-
 class AccommodationDispatcher extends CacheEntryDispatcher {
 
     constructor() {

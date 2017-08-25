@@ -2,8 +2,6 @@
 import CacheEntryDispatcher from './CacheEntryDispatcher';
 import Room from './Room';
 
-const assign = Object.assign;
-
 class RoomDispatcher extends CacheEntryDispatcher {
 
     constructor() {
