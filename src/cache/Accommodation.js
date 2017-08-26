@@ -1,17 +1,20 @@
 
-class Accommodation { 
+import BaseTerm from './BaseTerm';
+
+class Accommodation extends BaseTerm { 
 
     constructor(hotel_id, id) {
-        this.id = id;
-        this.hotel_id = hotel_id;
-        this.slug = '';
-        this.name = '';
-        this.description = '';
-        this.hidden = false;
-        this.locked = false;
-        this.created_at = "";
-        this.updated_at = "";
-        this.room = null;
+        super(hotel_id, id);
+        this._room = null;
+    }
+
+    set room(value) {
+        this._room = value;
+        this._markAsChanged()
+    }
+
+    get room() {
+        return this._room;
     }
 }
 

@@ -1,18 +1,26 @@
 
-class Term { 
+import { ObservableObject } from 'api-client-core';
+import BaseTerm from './BaseTerm';
+
+class Term extends BaseTerm { 
 
     constructor(id, hotel_id, taxonomy) {
-        this.id = id;
-        this.hotel_id = hotel_id;
-        this.parent_id = null;
-        this.taxonomy = taxonomy;
-        this.slug = '';
-        this.name = '';
-        this.description = '';
-        this.hidden = false;
-        this.locked = false;
-        this.created_at = "";
-        this.updated_at = "";
+        super(id, hotel_id);
+        this._taxonomy = taxonomy;
+        this._parent_id = null;
+    }
+
+    get taxonomy() {
+        return this._taxonomy;
+    }
+
+    set parent_id(value) {
+        this._parent_id = value;
+        this._markAsChanged()
+    }
+
+    get parent_id() {
+        return this._parent_id;
     }
 }
 
