@@ -19,10 +19,6 @@ class CacheEntryDispatcher  {
         return cacheEntry.id;
     }
 
-    getCacheEntryAsPlainObject(cacheMap, id) {
-        return {};
-    }
-
     dispatch(cacheMap, action) {
         const actionTypeFrags = action.split('_');
         if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
