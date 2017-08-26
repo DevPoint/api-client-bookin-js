@@ -1,5 +1,5 @@
 
-import CacheEntryDispatcher from './CacheEntryDispatcher';
+import { CacheEntryDispatcher } from 'api-client-core';
 import Accommodation from './Accommodation';
 
 class AccommodationDispatcher extends CacheEntryDispatcher {
