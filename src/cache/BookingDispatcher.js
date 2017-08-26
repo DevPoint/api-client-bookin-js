@@ -6,6 +6,7 @@ class BookingDispatcher extends CacheEntryDispatcher {
 
     constructor() {
         this._arrayPropsKeys = ['accommodations', 'guests'];
+        this._objectPropsKeys = [];
     }
 
     _createCacheEntry(payload) {
@@ -16,6 +17,9 @@ class BookingDispatcher extends CacheEntryDispatcher {
         for (let propsKey in payload) {
             if (this._arrayPropsKeys.indexOf(propsKey) >= 0) {
                 cacheEntry[propsKey] = this._cloneArray(payload[propsKey]);
+            }
+            else if (this._objectPropsKeys.indexOf(propsKey) >= 0) {
+                cacheEntry[propsKey] = this._cloneObject(payload[propsKey]);
             }
             else {
                 cacheEntry[propsKey] = payload[propsKey];

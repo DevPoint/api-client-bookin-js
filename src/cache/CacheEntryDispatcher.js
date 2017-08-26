@@ -49,6 +49,7 @@ class CacheEntryDispatcher  {
             if (cacheEntry) {
                 this._updateCacheEntry(cacheEntry, action.payload);
             }
+            cacheMap.markAsChanged();
         }
         else if (actionTypeFrags[0] === 'REMOVE') {
             cacheMap.remove(action.id);
