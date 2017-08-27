@@ -15,7 +15,7 @@ class BookInApiClient extends ApiClient {
             'hotel': new HotelClient(api),
             'accommodation': new AccommodationClient(api),
             'room': new RoomClient(api),
-            'seaon': new SeasonClient(api),
+            'season': new SeasonClient(api),
             'term': new TermClient(api),
             'booking': new BookingClient(api),
             'enquiry': new EnquiryClient(api),
