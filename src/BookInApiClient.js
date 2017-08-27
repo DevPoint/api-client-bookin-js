@@ -54,11 +54,11 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients[itemType].loadHotel(viewId, hotelId, slug, eagerType);
     }
 
-    loadHotelTaxonomyView(viewId, hotelId, taxonomy, builder) {
+    loadHotelTaxonomyTermView(viewId, hotelId, taxonomy, builder) {
         return this._cacheEntryClients['term'].loadHotelTaxonomyMany(viewId, hotelId, taxonomy, builder);
     }
 
-    loadHotelTaxonomyViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
+    loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
         return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug, eagerType);
     }
 }
