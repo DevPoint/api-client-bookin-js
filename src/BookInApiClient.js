@@ -2,22 +2,27 @@
 import { ApiClient } from 'api-client-core';
 import http from 'axios';
 import { 
-    HotelClient, TermClient, RoomClient,
+    HotelClient, TermClient, 
+    AccommodationClient, RoomClient, SeasonClient,
     BookingClient, EnquiryClient,
-    InvoiceClient, OfferClient, PaymentClient } from './client';
+    InvoiceClient, OfferClient, PaymentClient,
+    UserClient } from './client';
 
 class BookInApiClient extends ApiClient {
 
     _createCacheEntryClients(api) {
         return {
             'hotel': new HotelClient(api),
+            'accommodation': new AccommodationClient(api),
             'room': new RoomClient(api),
+            'seaon': new SeasonClient(api),
             'term': new TermClient(api),
             'booking': new BookingClient(api),
             'enquiry': new EnquiryClient(api),
             'invoice': new InvoiceClient(api),
             'offer': new OfferClient(api),
             'payment': new PaymentClient(api),
+            'user': new UserClient(api),
         };
     }
 
@@ -87,6 +92,10 @@ class BookInApiClient extends ApiClient {
 
     loadHotelPaymentView(viewId, hotelId, builder) {
         return this._cacheEntryClients['payment'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelUserView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['user'].loadHotelMany(viewId, hotelId, builder);
     }
 
 }

@@ -8,8 +8,8 @@ class BookInApi extends Api {
 
     _createCaches() {
         return {
-            'accommodation': new CacheMap('accommodation', true),
             'hotel': new CacheMap('hotel', true),
+            'accommodation': new CacheMap('accommodation', true),
             'room': new CacheMap('room', true),
             'roomprice': new CacheMap('roomprice', true),
             'season': new CacheMap('season', true),
