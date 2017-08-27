@@ -2,7 +2,7 @@
 import { 
     CacheEntryDispatcher, 
     CacheDispatcherFactory as BaseCacheDispatcherFactory } from 'api-client-core';
-import CacheTypes from './cache/types';
+import CacheTypes from './types';
 
 class CacheDispatcherFactory extends BaseCacheDispatcherFactory {
 
