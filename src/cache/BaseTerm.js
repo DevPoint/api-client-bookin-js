@@ -12,6 +12,8 @@ class BaseTerm extends CacheEntry {
         this._description = '';
         this._hidden = false;
         this._locked = false;
+        this._created_at = '';
+        this._updated_at = '';
     }
 
     get id() {
