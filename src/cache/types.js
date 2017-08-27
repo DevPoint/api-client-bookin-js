@@ -63,6 +63,19 @@ export default {
         updated_at: PropTypes.string
     },
 
+    'hotel': {
+        id: PropTypes.nullableInteger,
+        name: PropTypes.string,
+        street: PropTypes.string,
+        city: PropTypes.string,
+        zip: PropTypes.string,
+        email: PropTypes.string,
+        phone: PropTypes.string,
+        website: PropTypes.string,
+        created_at: PropTypes.string,
+        updated_at: PropTypes.string
+    },
+
     'booking': {
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
@@ -86,19 +99,6 @@ export default {
         phone: PropTypes.string,
         accommodations: PropTypes.array,
         guests: PropTypes.array,
-        created_at: PropTypes.string,
-        updated_at: PropTypes.string
-    },
-
-    'hotel': {
-        id: PropTypes.nullableInteger,
-        name: PropTypes.string,
-        street: PropTypes.string,
-        city: PropTypes.string,
-        zip: PropTypes.string,
-        email: PropTypes.string,
-        phone: PropTypes.string,
-        website: PropTypes.string,
         created_at: PropTypes.string,
         updated_at: PropTypes.string
     },
