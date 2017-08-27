@@ -102,6 +102,10 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return '';
     }
 
+    _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
+        return '';
+    }
+
     _buildApiUpdateUrl(apiHost, itemId) {
         return this._buildApiLoadUrl(apiHost, itemId, '');
     }
@@ -269,6 +273,13 @@ class CacheEntryClient extends BaseCacheEntryClient {
         const apiLoadManyUrl = this._buildApiLoadManyUrl(apiHost, apiParamsStr);
         return this._loadMany(viewId, apiLoadManyUrl);
     }
+
+    loadHotelMany(apiHost, hotelId, builder) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
+        const apiLoadManyUrl = this._buildApiLoadHotelManyUrl(apiHost, hotelId, apiParamsStr);
+        return this._loadMany(viewId, apiLoadManyUrl);
+    } 
 }
 
 export default CacheEntryClient;
