@@ -139,5 +139,15 @@ export default {
         hotel_id: PropTypes.nullableInteger,
         created_at: PropTypes.string,
         updated_at: PropTypes.string
+    },
+
+    'user': {
+        id: PropTypes.nullableInteger,
+        hotel_id: PropTypes.nullableInteger,
+        username: PropTypes.string,
+        email: PropTypes.string,
+        created_at: PropTypes.string,
+        updated_at: PropTypes.string
     }
+
 };
