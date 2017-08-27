@@ -1,7 +1,7 @@
 
-import BaseTerm from './BaseTerm';
+import CacheEntry from './BaseTerm';
 
-class Room extends BaseTerm { 
+class Room extends CacheEntry { 
 
     constructor(hotel_id, id) {
         super(hotel_id, id);

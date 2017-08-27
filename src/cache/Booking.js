@@ -1,9 +1,10 @@
 
-import { ObservableObject } from 'api-client-core';
+import { CacheEntry } from 'api-client-core';
 
-class Booking extends ObservableObject { 
+class Booking extends CacheEntry { 
 
     constructor(id, hotel_id) {
+        super();
         this._id = id;
         this._hotel_id = hotel_id;
         this._enquiry_id = null;

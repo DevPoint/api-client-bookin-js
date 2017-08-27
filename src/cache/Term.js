@@ -1,8 +1,8 @@
 
-import { ObservableObject } from 'api-client-core';
+import { CacheEntry } from 'api-client-core';
 import BaseTerm from './BaseTerm';
 
-class Term extends BaseTerm { 
+class Term extends CacheEntry { 
 
     constructor(id, hotel_id, taxonomy) {
         super(id, hotel_id);
