@@ -41,32 +41,32 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['term'].loadHotelTaxonomyMany(viewId, hotelId, taxonomy, builder);
     }
 
-    loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug) {
-        return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug);
+    loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
+        return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug, eagerType);
     }
 
     loadHotelAccommodationView(viewId, hotelId, builder) {
         return this._cacheEntryClients['accommodation'].loadHotelMany(viewId, hotelId, builder);
     }
 
-    loadHotelAccommodationViewBySlug(viewId, hotelId, slug) {
-        return this._cacheEntryClients['accommodation'].loadHotel(viewId, hotelId, slug);
+    loadHotelAccommodationViewBySlug(viewId, hotelId, slug, eagerType) {
+        return this._cacheEntryClients['accommodation'].loadHotel(viewId, hotelId, slug, eagerType);
     }
 
     loadHotelRoomView(viewId, hotelId, builder) {
         return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
     }
 
-    loadHotelRoomViewBySlug(viewId, hotelId, slug) {
-        return this._cacheEntryClients['room'].loadHotel(viewId, hotelId, slug);
+    loadHotelRoomViewBySlug(viewId, hotelId, slug, eagerType) {
+        return this._cacheEntryClients['room'].loadHotel(viewId, hotelId, slug, eagerType);
     }
 
     loadHotelSeasonView(viewId, hotelId, builder) {
         return this._cacheEntryClients['season'].loadHotelMany(viewId, hotelId, builder);
     }
 
-    loadHotelSeasonViewBySlug(viewId, hotelId, slug) {
-        return this._cacheEntryClients['season'].loadHotel(viewId, hotelId, slug);
+    loadHotelSeasonViewBySlug(viewId, hotelId, slug, eagerType) {
+        return this._cacheEntryClients['season'].loadHotel(viewId, hotelId, slug, eagerType);
     }
 
     loadHotelBookingView(viewId, hotelId, builder) {

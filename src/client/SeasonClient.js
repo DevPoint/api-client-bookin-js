@@ -23,7 +23,7 @@ class SeasonClient extends CacheEntryClient {
         return `${apiHost}/hotels/${hotelId}/seasons${paramsStr}`;
     }
 
-    loadHotel(apiHost, hotelId, slug) {
+    loadHotel(apiHost, hotelId, slug, eagerType) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
         const apiLoadUrl = this._buildApiLoadHotelUrl(apiHost, hotelId, slug, apiParamsStr);
