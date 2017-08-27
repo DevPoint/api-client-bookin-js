@@ -4,6 +4,19 @@ import {
 
 export default {
 
+    'hotel': {
+        id: PropTypes.nullableInteger,
+        name: PropTypes.string,
+        street: PropTypes.string,
+        city: PropTypes.string,
+        zip: PropTypes.string,
+        email: PropTypes.string,
+        phone: PropTypes.string,
+        website: PropTypes.string,
+        created_at: PropTypes.string,
+        updated_at: PropTypes.string
+    },
+
     'accommodation': {
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
@@ -59,19 +72,6 @@ export default {
         description: PropTypes.string,
         hidden: PropTypes.boolean,
         locked: PropTypes.boolean
-        created_at: PropTypes.string,
-        updated_at: PropTypes.string
-    },
-
-    'hotel': {
-        id: PropTypes.nullableInteger,
-        name: PropTypes.string,
-        street: PropTypes.string,
-        city: PropTypes.string,
-        zip: PropTypes.string,
-        email: PropTypes.string,
-        phone: PropTypes.string,
-        website: PropTypes.string,
         created_at: PropTypes.string,
         updated_at: PropTypes.string
     },
