@@ -31,6 +31,23 @@ class BookInApiClient extends ApiClient {
         this._api.endDispatch();
         return this._api.transactions().find(transactionId);
     }
+
+    loadHotelTaxonomyTermView(viewId, hotelId, taxonomy, builder) {
+        return this._cacheEntryClients['term'].loadHotelTaxonomyMany(viewId, hotelId, taxonomy, builder);
+    }
+
+    loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug) {
+        return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug);
+    }
+
+    loadHotelRoomView(viewId, hotelId, taxonomy, builder) {
+        return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelBookingView(viewId, hotelId, taxonomy, builder) {
+        return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
+    }
+
 }
 
 export default BookInApiClient;
