@@ -15,6 +15,10 @@ class TermClient extends CacheEntryClient {
         return `${apiHost}/terms${paramsStr}`;
     }
 
+    _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
+        return `${apiHost}/hotels/${hotelId}/terms${paramsStr}`;
+    }
+
     _buildApiLoadHotelTaxonomyUrl(apiHost, hotelId, taxonomy, slug, paramsStr) {
         return `${apiHost}/hotels/${hotelId}/taxonomies/${taxonomy}/terms/${slug}${paramsStr}`;
     }
