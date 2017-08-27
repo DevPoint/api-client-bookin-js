@@ -185,7 +185,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
-    _load(viewId, itemId, eagerType, apiLoadUrl) {
+    _load(viewId, eagerType, apiLoadUrl) {
         this._api.dispatch(this._api.loadingStart(viewId, this._itemType, {
             eagerType: eagerType ? eagerType : 'full',
             offset: 0,
@@ -196,6 +196,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
             url: apiLoadUrl
         }).then(response => {
             const cacheEntry = response.data.cacheEntry;
+            const itemId = this._getCacheEntryId(cacheEntry);
             this._api.beginDispatch();
             this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
             const result = this._api.dispatch(this._api.loadingSucceeded(
@@ -259,7 +260,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
         const apiLoadUrl = this._buildApiLoadUrl(apiHost, itemId, apiParamsStr);
-        return this._load(viewId, itemId, eagerType, apiLoadUrl);
+        return this._load(viewId, eagerType, apiLoadUrl);
     }
 
     loadMany(viewId, builder) {

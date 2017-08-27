@@ -44,8 +44,12 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
     }
 
+    loadHotelRoomViewBySlug(viewId, hotelId, slug) {
+        return this._cacheEntryClients['room'].loadHotel(viewId, hotelId, slug);
+    }
+
     loadHotelBookingView(viewId, hotelId, taxonomy, builder) {
-        return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
+        return this._cacheEntryClients['booking'].loadHotelMany(viewId, hotelId, builder);
     }
 
 }
