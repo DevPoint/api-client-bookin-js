@@ -94,6 +94,18 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['payment'].loadHotelMany(viewId, hotelId, builder);
     }
 
+    loadBookingInvoiceView(viewId, bookingId, builder) {
+        return this._cacheEntryClients['invoice'].loadBookingMany(viewId, bookingId, builder);
+    }
+
+    loadBookingOfferView(viewId, bookingId, builder) {
+        return this._cacheEntryClients['offer'].loadBookingMany(viewId, bookingId, builder);
+    }
+
+    loadBookingPaymentView(viewId, bookingId, builder) {
+        return this._cacheEntryClients['payment'].loadBookingMany(viewId, bookingId, builder);
+    }
+
     loadHotelUserView(viewId, hotelId, builder) {
         return this._cacheEntryClients['user'].loadHotelMany(viewId, hotelId, builder);
     }

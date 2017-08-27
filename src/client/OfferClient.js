@@ -15,9 +15,20 @@ class OfferClient extends CacheEntryClient {
         return `${apiHost}/offers${paramsStr}`;
     }
 
+    _buildApiLoadBookingManyUrl(apiHost, bookingId, paramsStr) {
+        return `${apiHost}/bookings/${bookingId}/offers${paramsStr}`;
+    }
+
     _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
         return `${apiHost}/hotels/${hotelId}/offers${paramsStr}`;
     }
+
+    loadBookingMany(apiHost, bookingId, builder) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
+        const apiLoadManyUrl = this._buildApiLoadBookingManyUrl(apiHost, bookingId, apiParamsStr);
+        return this._loadMany(viewId, apiLoadManyUrl);
+    } 
 }
 
 export default OfferClient;
