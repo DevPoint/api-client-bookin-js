@@ -3,16 +3,21 @@ import { ApiClient } from 'api-client-core';
 import http from 'axios';
 import { 
     HotelClient, TermClient, RoomClient,
-    BooingClient } from './client';
+    BookingClient, EnquiryClient,
+    InvoiceClient, OfferClient, PaymentClient } from './client';
 
 class BookInApiClient extends ApiClient {
 
     _createCacheEntryClients(api) {
         return {
-            'hotel': new HotelClient(api)
-            'room': new RoomClient(api)
-            'term': new TermClient(api)
-            'booking': new BooingClient(api)
+            'hotel': new HotelClient(api),
+            'room': new RoomClient(api),
+            'term': new TermClient(api),
+            'booking': new BookingClient(api),
+            'enquiry': new EnquiryClient(api),
+            'invoice': new InvoiceClient(api),
+            'offer': new OfferClient(api),
+            'payment': new PaymentClient(api),
         };
     }
 
@@ -40,7 +45,7 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug);
     }
 
-    loadHotelRoomView(viewId, hotelId, taxonomy, builder) {
+    loadHotelRoomView(viewId, hotelId, builder) {
         return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
     }
 
@@ -48,8 +53,24 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['room'].loadHotel(viewId, hotelId, slug);
     }
 
-    loadHotelBookingView(viewId, hotelId, taxonomy, builder) {
+    loadHotelBookingView(viewId, hotelId, builder) {
         return this._cacheEntryClients['booking'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelEnquiryView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['enquiry'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelInvoiceView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['invoice'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelOfferView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['offer'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelPaymentView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['payment'].loadHotelMany(viewId, hotelId, builder);
     }
 
 }
