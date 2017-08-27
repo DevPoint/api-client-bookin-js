@@ -1,13 +1,18 @@
 
 import { ApiClient } from 'api-client-core';
 import http from 'axios';
-import { HotelClient } from './client';
+import { 
+    HotelClient, TermClient, RoomClient,
+    BooingClient } from './client';
 
 class BookInApiClient extends ApiClient {
 
     _createCacheEntryClients(api) {
         return {
             'hotel': new HotelClient(api)
+            'room': new RoomClient(api)
+            'term': new TermClient(api)
+            'booking': new BooingClient(api)
         };
     }
 
