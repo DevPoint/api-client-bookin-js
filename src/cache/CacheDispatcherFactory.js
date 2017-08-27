@@ -1,5 +1,7 @@
 
-import { CacheDispatcherFactory as BaseCacheDispatcherFactory } from 'api-client-core';
+import { 
+    CacheEntryDispatcher, 
+    CacheDispatcherFactory as BaseCacheDispatcherFactory } from 'api-client-core';
 import AccommodationDispatcher from './AccommodationDispatcher';
 import BookingDispatcher from './BookingDispatcher';
 import HotelDispatcher from './HotelDispatcher';
@@ -10,11 +12,11 @@ class CacheDispatcherFactory extends BaseCacheDispatcherFactory {
 
     createDispatchers() {
         const cacheDispatchers = {
-        	'accommodation' => new AccommodationDispatcher(),
-        	'booking' => new BookingDispatcher(),
-        	'hotel' => new HotelDispatcher(),
-        	'room' => new RoomDispatcher(),
-        	'term' => new TermDispatcher()
+        	'accommodation' => new CacheEntryDispatcher(),
+        	'booking' => new CacheEntryDispatcher(),
+        	'hotel' => new CacheEntryDispatcher(),
+        	'room' => new CacheEntryDispatcher(),
+        	'term' => new CacheEntryDispatcher()
         };
         return cacheDispatchers;
     }

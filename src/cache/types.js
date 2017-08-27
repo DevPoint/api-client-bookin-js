@@ -1,10 +1,12 @@
 
 import { 
+    CacheConstructorType,
     CachePropTypes as PropTypes } from 'api-client-core';
 
 export default {
 
     'accommodation': {
+        construct: new CacheConstructorType('id', 'hotel_id', 'slug'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         room: PropTypes.nullableInteger,
@@ -18,6 +20,7 @@ export default {
     },
 
     'room': {
+        construct: new CacheConstructorType('id', 'hotel_id', 'slug'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         slug: PropTypes.string,
@@ -30,6 +33,7 @@ export default {
     },
 
     'roomprice': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         created_at: PropTypes.string,
@@ -37,6 +41,7 @@ export default {
     },
 
     'season': {
+        construct: new CacheConstructorType('id', 'hotel_id', 'slug'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         slug: PropTypes.string,
@@ -50,6 +55,7 @@ export default {
     },
 
     'term': {
+        construct: new CacheConstructorType('id', 'hotel_id', 'taxonomy', 'slug'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         parent_id: PropTypes.nullableInteger,
@@ -64,6 +70,7 @@ export default {
     },
 
     'booking': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         enquiry_id: PropTypes.nullableInteger,
@@ -91,6 +98,7 @@ export default {
     },
 
     'hotel': {
+        construct: new CacheConstructorType('id'),
         id: PropTypes.nullableInteger,
         name: PropTypes.string,
         street: PropTypes.string,
@@ -104,6 +112,7 @@ export default {
     },
 
     'enquiry': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         title: PropTypes.string,
@@ -121,6 +130,7 @@ export default {
     },
 
     'invoice': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         created_at: PropTypes.string,
@@ -128,6 +138,7 @@ export default {
     },
 
     'offer': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         created_at: PropTypes.string,
@@ -135,6 +146,7 @@ export default {
     },
 
     'payment': {
+        construct: new CacheConstructorType('id', 'hotel_id'),
         id: PropTypes.nullableInteger,
         hotel_id: PropTypes.nullableInteger,
         created_at: PropTypes.string,
@@ -142,8 +154,8 @@ export default {
     },
 
     'user': {
+        construct: new CacheConstructorType('id'),
         id: PropTypes.nullableInteger,
-        hotel_id: PropTypes.nullableInteger,
         username: PropTypes.string,
         email: PropTypes.string,
         created_at: PropTypes.string,
