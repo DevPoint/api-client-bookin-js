@@ -45,12 +45,28 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug);
     }
 
+    loadHotelAccommodationView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['accommodation'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelAccommodationViewBySlug(viewId, hotelId, slug) {
+        return this._cacheEntryClients['accommodation'].loadHotel(viewId, hotelId, slug);
+    }
+
     loadHotelRoomView(viewId, hotelId, builder) {
         return this._cacheEntryClients['room'].loadHotelMany(viewId, hotelId, builder);
     }
 
     loadHotelRoomViewBySlug(viewId, hotelId, slug) {
         return this._cacheEntryClients['room'].loadHotel(viewId, hotelId, slug);
+    }
+
+    loadHotelSeasonView(viewId, hotelId, builder) {
+        return this._cacheEntryClients['season'].loadHotelMany(viewId, hotelId, builder);
+    }
+
+    loadHotelSeasonViewBySlug(viewId, hotelId, slug) {
+        return this._cacheEntryClients['season'].loadHotel(viewId, hotelId, slug);
     }
 
     loadHotelBookingView(viewId, hotelId, builder) {
