@@ -8,17 +8,28 @@ class CacheDispatcherFactory extends BaseCacheDispatcherFactory {
 
     createDispatchers() {
         const cacheDispatchers = {
-        	'accommodation' => new CacheEntryDispatcher(CacheTypes.accommodation),
-        	'hotel' => new CacheEntryDispatcher(CacheTypes.hotel),
-        	'room' => new CacheEntryDispatcher(CacheTypes.room),
-            'roomprice' => new CacheEntryDispatcher(CacheTypes.roomprice),
-            'season' => new CacheEntryDispatcher(CacheTypes.season),
-        	'term' => new CacheEntryDispatcher(CacheTypes.term),
-            'invoice' => new CacheEntryDispatcher(CacheTypes.invoice),
-            'offer' => new CacheEntryDispatcher(CacheTypes.offer),
-            'payment' => new CacheEntryDispatcher(CacheTypes.payment),
-            'booking' => new CacheEntryDispatcher(CacheTypes.booking),
-            'enquiry' => new CacheEntryDispatcher(CacheTypes.enquiry),
+        	'accommodation' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.accommodation)),
+        	'hotel' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.hotel)),
+        	'room' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.room)),
+            'roomprice' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.roomprice)),
+            'season' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.season)),
+        	'term' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.term)),
+            'invoice' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.invoice)),
+            'offer' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.offer)),
+            'payment' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.payment)),
+            'booking' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.booking)),
+            'enquiry' => new CacheEntryDispatcher(
+                this._createCacheEntryClass(CacheTypes.enquiry)),
         };
         return cacheDispatchers;
     }
