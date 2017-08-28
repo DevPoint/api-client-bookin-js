@@ -1,6 +1,6 @@
 
 import { 
-    CachePropTypes as PropTypes } from 'api-client-core';
+    ObservablePropTypes as PropTypes } from 'api-client-core';
 
 export default {
 
