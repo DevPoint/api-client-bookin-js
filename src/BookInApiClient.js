@@ -27,6 +27,14 @@ class BookInApiClient extends ApiClient {
         };
     }
 
+    bookingLoadView(viewId, bookingId, builder) {
+        return this._cacheEntryClients[builder.itemType].bookingLoadMany(viewId, bookingId, builder);
+    }
+
+    customerLoadView(viewId, customerId, builder) {
+        return this._cacheEntryClients[builder.itemType].customerLoadMany(viewId, customerId, builder);
+    }
+
     hotelInsertTransaction(transactionId, itemType, hotelid, data) {
         return this._cacheEntryClients[itemType].hotelInsert(viewId, hotelId, data);
     }
@@ -43,14 +51,6 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients[itemType].loadHotelBySlug(viewId, hotelId, slug, eagerType);
     }
 
-    bookingLoadView(viewId, bookingId, builder) {
-        return this._cacheEntryClients[builder.itemType].bookingLoadMany(viewId, bookingId, builder);
-    }
-
-    customerLoadView(viewId, customerId, builder) {
-        return this._cacheEntryClients[builder.itemType].customerLoadMany(viewId, customerId, builder);
-    }
-
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
         return this._cacheEntryClients['term'].hotelTaxonomyInsert(viewId, hotelId, data);
     }
@@ -59,12 +59,12 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients['term'].hotelTaxonomyUpdateBySlug(viewId, hotelId, taxonomy, slug, data);
     }
 
-    loadHotelTaxonomyTermView(viewId, hotelId, taxonomy, builder) {
-        return this._cacheEntryClients['term'].loadHotelTaxonomyMany(viewId, hotelId, taxonomy, builder);
+    hotelTaxonomyLoadTermView(viewId, hotelId, taxonomy, builder) {
+        return this._cacheEntryClients['term'].hotelTaxonomyLoadMany(viewId, hotelId, taxonomy, builder);
     }
 
-    loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
-        return this._cacheEntryClients['term'].loadHotelTaxonomyBySlug(viewId, hotelId, taxonomy, slug, eagerType);
+    hotelTaxonomyLoadTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
+        return this._cacheEntryClients['term'].hotelTaxonomyLoadBySlug(viewId, hotelId, taxonomy, slug, eagerType);
     }
 }
 

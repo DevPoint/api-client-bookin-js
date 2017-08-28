@@ -49,6 +49,14 @@ class BookInApi extends Api {
         return transactionActions.updateBySlugStart(this.nameSpace, transactionId, itemType, slug, data);
     }
 
+    bookingLoadView(viewId, bookingId, builder) {
+        return this._client.bookingLoadView(viewId, bookingId, builder);
+    }
+
+    customerLoadView(viewId, customerId, builder) {
+        return this._client.customerLoadView(viewId, customerId, builder);
+    }
+
     hotelInsertTransaction(transactionId, itemType, hotelid, data) {
         return this._client.hotelInsertTransaction(transactionId, itemType, hotelid, data);
     }
@@ -67,14 +75,6 @@ class BookInApi extends Api {
 
     hotelLoadView(viewId, bookingId, builder) {
         return this._client.hotelLoadView(viewId, bookingId, builder);
-    }
-
-    bookingLoadView(viewId, bookingId, builder) {
-        return this._client.bookingLoadView(viewId, bookingId, builder);
-    }
-
-    customerLoadView(viewId, customerId, builder) {
-        return this._client.customerLoadView(viewId, customerId, builder);
     }
 
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
