@@ -86,6 +86,10 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._buildApiLoadUrl(apiHost, itemId, '');
     }
 
+    _buildApiHotelUpdateBySlugUrl(apiHost, hotelId, slug) {
+        return this._buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, '');
+    }
+
     _buildApiInsertUrl(apiHost) {
         return this._buildApiLoadManyUrl(apiHost, '');
     }
