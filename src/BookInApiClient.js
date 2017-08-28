@@ -27,12 +27,16 @@ class BookInApiClient extends ApiClient {
         };
     }
 
-    hotelInsert(transactionId, hotelid, data) {
-        return this._cacheEntryClients[builder.itemType].hotelInsert(viewId, hotelId, data);
+    hotelInsert(transactionId, itemType, hotelid, data) {
+        return this._cacheEntryClients[itemType].hotelInsert(viewId, hotelId, data);
     }
 
     hotelTaxonomyTermInsert(transactionId, hotelid, data) {
         return this._cacheEntryClients['term'].hotelTaxonomyInsert(viewId, hotelId, data);
+    }
+
+    hotelUpdateBySlug(transactionId, itemType, hotelid, slug, data) {
+        return this._cacheEntryClients[itemType].hotelUpdateBySlug(viewId, hotelId, slug, data);
     }
 
     loadHotelView(viewId, hotelId, builder) {
