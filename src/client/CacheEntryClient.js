@@ -197,6 +197,36 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
+    _updateBySlug(transactionId, slug, data, apiUpdateUrl) {
+        this._api.dispatch(this._api.updateBySlugStart(transactionId, this._itemType, slug, data));
+        if (!apiUpdateUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {})));
+            });
+        }
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
+        return http({
+            method: 'PUT', 
+            url: apiUpdateUrl, 
+            headers: apiHeaders,
+            data: data,
+            withCredentials: false
+        }).then(response => {
+            const cacheEntry = response.data.cacheEntry;
+            const itemId = this._getCacheEntryId(cacheEntry);
+            this._api.beginDispatch();
+            this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
+            const result = this._api.dispatch(this._api.updateSucceeded(transactionId));
+            this._api.endDispatch();
+            return result;
+        }).catch(errorResponse => {
+            const { errors, validationErrors } = errorResponse.data;
+            return this._api.dispatch(this._api.updateFailed(
+                transactionId, errors, validationErrors
+            ));
+        });
+    }
+
     _delete(transactionId, itemId, apiDeleteUrl) {
         this._api.dispatch(this._api.deleteStart(transactionId, this._itemType, itemId));
         if (!apiDeleteUrl) {
