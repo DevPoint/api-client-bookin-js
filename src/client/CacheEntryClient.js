@@ -82,6 +82,22 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return headers;
     }
 
+    _buildApiUpdateUrl(apiHost, itemId) {
+        return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
+    _buildApiInsertUrl(apiHost) {
+        return this._buildApiLoadManyUrl(apiHost, '');
+    }
+
+    _buildApiHotelInsertUrl(apiHost, hotelId) {
+        return this._buildApiLoadHotelManyUrl(apiHost, hotelId, '');
+    }
+
+    _buildApiDeleteUrl(apiHost, itemId) {
+        return this._buildApiLoadUrl(apiHost, itemId, '');
+    }
+
     _buildApiLoadParamsStr(itemId, eagerType) {
         let apiParamsStr = '';
         apiParamsStr += this._appendApiTokenStr(apiParamsStr, this._api.getAuthToken());
@@ -116,22 +132,6 @@ class CacheEntryClient extends BaseCacheEntryClient {
 
     _buildApiLoadCustomerManyUrl(apiHost, customerId, paramsStr) {
         return '';
-    }
-
-    _buildApiUpdateUrl(apiHost, itemId) {
-        return this._buildApiLoadUrl(apiHost, itemId, '');
-    }
-
-    _buildApiInsertUrl(apiHost) {
-        return this._buildApiLoadManyUrl(apiHost, '');
-    }
-
-    _buildApiInsertHotelUrl(apiHost, hotelId) {
-        return this._buildApiLoadHotelManyUrl(apiHost, hotelId, '');
-    }
-
-    _buildApiDeleteUrl(apiHost, itemId) {
-        return this._buildApiLoadUrl(apiHost, itemId, '');
     }
 
     _insert(transactionId, data, apiInsertUrl) {
@@ -291,7 +291,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
 
     hotelInsert(transactionId, hotelid, data) {
         const apiHost = this._api.getHost();
-        const apiInsertUrl = this._buildApiInsertHotelUrl(apiHost, hotelid);
+        const apiInsertUrl = this._buildApiHotelInsertUrl(apiHost, hotelid);
         return this._insert(transactionId, data, apiInsertUrl);
     }
 
