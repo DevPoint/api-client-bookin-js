@@ -4,6 +4,7 @@ import BookInApiClient from './BookInApiClient';
 import BookInApiDispatcher from './BookInApiDispatcher';
 import { CacheDispatcherFactory } from './cache';
 import { TransactionDispatcherFactory } from './transaction';
+import transactionActions from './transaction/actions';
 
 class BookInApi extends Api {
 
@@ -43,6 +44,11 @@ class BookInApi extends Api {
     getAuthToken() {
         return '';
     }
+
+    updateBySlugStart(transactionId, itemType, slug, data) {
+        return transactionActions.updateBySlugStart(this.nameSpace, transactionId, slug, data);
+    }
+
 }
 
 export default BookInApi;
