@@ -335,6 +335,12 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._update(transactionId, itemId, data, apiUpdateUrl);
     }
 
+    hotelUpdateBySlug(transactionId, hotelid, slug, data) {
+        const apiHost = this._api.getHost();
+        const apiUpdateUrl = this._buildApiHotelUpdateBySlugUrl(apiHost, hotelid, slug);
+        return this._updateBySlug(transactionId, data, apiUpdateUrl);
+    }
+
     delete(transactionId, itemId) {
         const apiHost = this._api.getHost();
         const apiDeleteUrl = this._buildApiDeleteUrl(apiHost, itemId);
