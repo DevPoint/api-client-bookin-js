@@ -36,11 +36,11 @@ class BookInApiClient extends ApiClient {
     }
 
     hotelInsertTransaction(transactionId, itemType, hotelid, data) {
-        return this._cacheEntryClients[itemType].hotelInsert(viewId, hotelId, data);
+        return this._cacheEntryClients[itemType].hotelInsert(transactionId, hotelId, data);
     }
 
     hotelUpdateTransactionBySlug(transactionId, itemType, hotelid, slug, data) {
-        return this._cacheEntryClients[itemType].hotelUpdateBySlug(viewId, hotelId, slug, data);
+        return this._cacheEntryClients[itemType].hotelUpdateBySlug(transactionId, hotelId, slug, data);
     }
 
     hotelLoadView(viewId, hotelId, builder) {
@@ -52,11 +52,11 @@ class BookInApiClient extends ApiClient {
     }
 
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
-        return this._cacheEntryClients['term'].hotelTaxonomyInsert(viewId, hotelId, data);
+        return this._cacheEntryClients['term'].hotelTaxonomyInsert(transactionId, hotelId, data);
     }
 
     hotelTaxonomyTermUpdateTransactionBySlug(transactionId, hotelid, taxonomy, slug, data) {
-        return this._cacheEntryClients['term'].hotelTaxonomyUpdateBySlug(viewId, hotelId, taxonomy, slug, data);
+        return this._cacheEntryClients['term'].hotelTaxonomyUpdateBySlug(transactionId, hotelId, taxonomy, slug, data);
     }
 
     hotelTaxonomyLoadTermView(viewId, hotelId, taxonomy, builder) {

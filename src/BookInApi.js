@@ -73,8 +73,8 @@ class BookInApi extends Api {
         return this._client.hotelLoadViewBySlug(viewId, itemType, hotelId, slug, eagerType);
     }
 
-    hotelLoadView(viewId, bookingId, builder) {
-        return this._client.hotelLoadView(viewId, bookingId, builder);
+    hotelLoadView(viewId, hotelId, builder) {
+        return this._client.hotelLoadView(viewId, hotelId, builder);
     }
 
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
