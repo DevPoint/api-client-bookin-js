@@ -57,8 +57,8 @@ class TermClient extends CacheEntryClient {
     hotelTaxonomyLoadMany(apiHost, hotelId, taxonomy, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiHotelTaxonomyLoadManyUrl(apiHost, hotelId, taxonomy, apiParamsStr);
-        return this._loadMany(viewId, apiLoadManyUrl);
+        const apiLoadUrl = this._buildApiHotelTaxonomyLoadManyUrl(apiHost, hotelId, taxonomy, apiParamsStr);
+        return this._loadMany(viewId, apiLoadUrl);
     }
 }
 

@@ -323,22 +323,10 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._insert(transactionId, data, apiInsertUrl);
     }
 
-    hotelInsert(transactionId, hotelid, data) {
-        const apiHost = this._api.getHost();
-        const apiInsertUrl = this._buildApiHotelInsertUrl(apiHost, hotelid);
-        return this._insert(transactionId, data, apiInsertUrl);
-    }
-
     update(transactionId, itemId, data) {
         const apiHost = this._api.getHost();
         const apiUpdateUrl = this._buildApiUpdateUrl(apiHost, itemId);
         return this._update(transactionId, itemId, data, apiUpdateUrl);
-    }
-
-    hotelUpdateBySlug(transactionId, hotelid, slug, data) {
-        const apiHost = this._api.getHost();
-        const apiUpdateUrl = this._buildApiHotelUpdateBySlugUrl(apiHost, hotelid, slug);
-        return this._updateBySlug(transactionId, data, apiUpdateUrl);
     }
 
     delete(transactionId, itemId) {
@@ -357,36 +345,48 @@ class CacheEntryClient extends BaseCacheEntryClient {
     loadMany(viewId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiLoadManyUrl(apiHost, apiParamsStr);
-        return this._loadMany(viewId, apiLoadManyUrl);
+        const apiLoadUrl = this._buildApiLoadManyUrl(apiHost, apiParamsStr);
+        return this._loadMany(viewId, apiLoadUrl);
     }
-
-    hotelLoadBySlug(apiHost, hotelId, slug, eagerType) {
-        const apiHost = this._api.getHost();
-        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
-        const apiLoadBySlugUrl = this._buildApiHotelLoadBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
-        return this._load(viewId, eagerType, apiLoadBySlugUrl);
-    }
-
-    hotelLoadMany(apiHost, hotelId, builder) {
-        const apiHost = this._api.getHost();
-        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiHotelLoadManyUrl(apiHost, hotelId, apiParamsStr);
-        return this._loadMany(viewId, apiLoadManyUrl);
-    } 
 
     bookingLoadMany(apiHost, bookingId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiBookingLoadManyUrl(apiHost, bookingId, apiParamsStr);
-        return this._loadMany(viewId, apiLoadManyUrl);
+        const apiLoadUrl = this._buildApiBookingLoadManyUrl(apiHost, bookingId, apiParamsStr);
+        return this._loadMany(viewId, apiLoadUrl);
     } 
     
     customerLoadMany(apiHost, customerId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiCustomerLoadManyUrl(apiHost, customerId, apiParamsStr);
-        return this._loadMany(viewId, apiLoadManyUrl);
+        const apiLoadUrl = this._buildApiCustomerLoadManyUrl(apiHost, customerId, apiParamsStr);
+        return this._loadMany(viewId, apiLoadUrl);
+    } 
+
+    hotelInsert(transactionId, hotelid, data) {
+        const apiHost = this._api.getHost();
+        const apiInsertUrl = this._buildApiHotelInsertUrl(apiHost, hotelid);
+        return this._insert(transactionId, data, apiInsertUrl);
+    }
+
+    hotelUpdateBySlug(transactionId, hotelid, slug, data) {
+        const apiHost = this._api.getHost();
+        const apiUpdateUrl = this._buildApiHotelUpdateBySlugUrl(apiHost, hotelid, slug);
+        return this._updateBySlug(transactionId, data, apiUpdateUrl);
+    }
+
+    hotelLoadBySlug(apiHost, hotelId, slug, eagerType) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
+        const apiLoadUrl = this._buildApiHotelLoadBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
+        return this._load(viewId, eagerType, apiLoadUrl);
+    }
+
+    hotelLoadMany(apiHost, hotelId, builder) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
+        const apiLoadUrl = this._buildApiHotelLoadManyUrl(apiHost, hotelId, apiParamsStr);
+        return this._loadMany(viewId, apiLoadUrl);
     } 
 }
 
