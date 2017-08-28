@@ -1,5 +1,5 @@
 
-import Transaction from './Transaction';
+import { Transaction } from 'api-client-core';
 
 class UpdateBySlugTransaction extends Transaction {
 

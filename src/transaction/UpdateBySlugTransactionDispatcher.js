@@ -1,5 +1,5 @@
 
-import TransactionDispatcher from 'api-client-core';
+import { TransactionDispatcher } from 'api-client-core';
 import UpdateBySlugTransaction from './UpdateBySlugTransaction';
 
 class UpdateBySlugTransactionDispatcher extends TransactionDispatcher {
