@@ -1,13 +1,18 @@
 
 import { Transaction } from 'api-client-core';
 
-class UpdateBySlugTransaction extends Transaction {
+class UpdateByHotelSlugTransaction extends Transaction {
 
-    constructor(transactionId, itemType, slug, data) {
-        super(transactionId, itemType, 'updateBySlug');
+    constructor(transactionId, itemType, hotelId, slug, data) {
+        super(transactionId, itemType, 'updateByHotelSlug');
+        this._hotelId = hotelId;
         this._slug = slug;
         this._data = data;
         this._validationErrors = {};
+    }
+
+    get hotelId()) {
+        return this._hotelId;
     }
 
     get slug() {
@@ -33,4 +38,4 @@ class UpdateBySlugTransaction extends Transaction {
     }
 }
 
-export default UpdateTransaction;
+export default UpdateByHotelSlugTransaction;

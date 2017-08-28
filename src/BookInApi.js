@@ -45,8 +45,16 @@ class BookInApi extends Api {
         return '';
     }
 
-    updateBySlugStart(transactionId, itemType, slug, data) {
-        return transactionActions.updateBySlugStart(this.nameSpace, transactionId, itemType, slug, data);
+    updateByHotelSlugStart(transactionId, itemType, hotelId, slug, data) {
+        return transactionActions.updateByHotelSlugStart(
+            this.nameSpace, transactionId, itemType, 
+            hotelId, slug, data);
+    }
+
+    updateByHotelTaxonomySlugStart(transactionId, itemType, hotelId, taxonomy, slug, data) {
+        return transactionActions.updateByHotelTaxonomySlugStart(
+            this.nameSpace, transactionId, itemType, 
+            hotelId, taxonomy, slug, data);
     }
 
     bookingLoadView(viewId, bookingId, builder) {

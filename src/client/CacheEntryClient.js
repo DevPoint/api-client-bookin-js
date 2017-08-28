@@ -138,9 +138,9 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return '';
     }
 
-    _insert(transactionId, data, apiInsertUrl) {
-        this._api.dispatch(this._api.insertStart(transactionId, this._itemType, data));
-        if (!apiInsertUrl) {
+    _insert(transactionId, startAction, data, apiUrl) {
+        this._api.dispatch(startAction));
+        if (!apiUrl) {
             return new Promise((resolve, reject) => {
                 reject(this._api.dispatch(this._api.insertFailed(transactionId, ['not_implemented'], {})));
             });
@@ -148,7 +148,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         return http({
             method: 'POST', 
-            url: apiInsertUrl, 
+            url: apiUrl, 
             headers: apiHeaders,
             data: data,
             withCredentials: false
@@ -168,9 +168,9 @@ class CacheEntryClient extends BaseCacheEntryClient {
         });
     }
 
-    _update(transactionId, itemId, data, apiUpdateUrl) {
-        this._api.dispatch(this._api.updateStart(transactionId, this._itemType, itemId, data));
-        if (!apiUpdateUrl) {
+    _update(transactionId, startAction, data, apiUrl) {
+        this._api.dispatch(startAction);
+        if (!apiUrl) {
             return new Promise((resolve, reject) => {
                 reject(this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {})));
             });
@@ -178,36 +178,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
         const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         return http({
             method: 'PUT', 
-            url: apiUpdateUrl, 
-            headers: apiHeaders,
-            data: data,
-            withCredentials: false
-        }).then(response => {
-            const cacheEntry = response.data.cacheEntry;
-            this._api.beginDispatch();
-            this._api.dispatch(this._api.setCacheEntry(this._itemType, itemId, cacheEntry));
-            const result = this._api.dispatch(this._api.updateSucceeded(transactionId));
-            this._api.endDispatch();
-            return result;
-        }).catch(errorResponse => {
-            const { errors, validationErrors } = errorResponse.data;
-            return this._api.dispatch(this._api.updateFailed(
-                transactionId, errors, validationErrors
-            ));
-        });
-    }
-
-    _updateBySlug(transactionId, slug, data, apiUpdateUrl) {
-        this._api.dispatch(this._api.updateBySlugStart(transactionId, this._itemType, slug, data));
-        if (!apiUpdateUrl) {
-            return new Promise((resolve, reject) => {
-                reject(this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {})));
-            });
-        }
-        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
-        return http({
-            method: 'PUT', 
-            url: apiUpdateUrl, 
+            url: apiUrl, 
             headers: apiHeaders,
             data: data,
             withCredentials: false
@@ -320,13 +291,15 @@ class CacheEntryClient extends BaseCacheEntryClient {
     insert(transactionId, data) {
         const apiHost = this._api.getHost();
         const apiInsertUrl = this._buildApiInsertUrl(apiHost);
-        return this._insert(transactionId, data, apiInsertUrl);
+        const apiStartAction = this._api.insertStart(transactionId, this._itemType, data);
+        return this._insert(transactionId, apiStartAction, data, apiInsertUrl);
     }
 
     update(transactionId, itemId, data) {
         const apiHost = this._api.getHost();
         const apiUpdateUrl = this._buildApiUpdateUrl(apiHost, itemId);
-        return this._update(transactionId, itemId, data, apiUpdateUrl);
+        const apiStartAction = this._api.updateStart(transactionId, this._itemType, itemId, data);
+        return this._update(transactionId, apiStartAction, data, apiUpdateUrl);
     }
 
     delete(transactionId, itemId) {
@@ -366,13 +339,15 @@ class CacheEntryClient extends BaseCacheEntryClient {
     hotelInsert(transactionId, hotelid, data) {
         const apiHost = this._api.getHost();
         const apiInsertUrl = this._buildApiHotelInsertUrl(apiHost, hotelid);
-        return this._insert(transactionId, data, apiInsertUrl);
+        const apiStartAction = this._api.insertStart(transactionId, this._itemType, data);
+        return this._insert(transactionId, apiStartAction, data, apiInsertUrl);
     }
 
     hotelUpdateBySlug(transactionId, hotelid, slug, data) {
         const apiHost = this._api.getHost();
         const apiUpdateUrl = this._buildApiHotelUpdateBySlugUrl(apiHost, hotelid, slug);
-        return this._updateBySlug(transactionId, data, apiUpdateUrl);
+        const apiStartAction = this._api.updateByHotelSlugStart(transactionId, this._itemType, hotelId, slug, data);
+        return this._update(transactionId, apiStartAction, data, apiUpdateUrl);
     }
 
     hotelLoadBySlug(apiHost, hotelId, slug, eagerType) {

@@ -38,26 +38,32 @@ class TermClient extends CacheEntryClient {
     hotelTaxonomyInsert(transactionId, hotelid, taxonomy, data) {
         const apiHost = this._api.getHost();
         const apiInsertUrl = this._buildApiHotelTaxonomyInsertUrl(apiHost, hotelid, taxonomy);
-        return this._insert(transactionId, data, apiInsertUrl);
+        const apiStartAction = this._api.insertStart(transactionId, this._itemType, data);
+        return this._insert(transactionId, apiStartAction, data, apiInsertUrl);
     }
 
     hotelTaxonomyUpdateBySlug(transactionId, hotelid, taxonomy, slug, data) {
         const apiHost = this._api.getHost();
-        const apiUpdateUrl = this._buildApiHotelTaxonomyUpdateBySlugUrl(apiHost, hotelid, taxonomy, slug, '');
-        return this._updateBySlug(transactionId, data, apiUpdateUrl);
+        const apiUpdateUrl = this._buildApiHotelTaxonomyUpdateBySlugUrl(
+            apiHost, hotelid, taxonomy, slug, '');
+        const apiStartAction = this._api.updateByHotelTaxonomySlugStart(
+            transactionId, this._itemType, hotelId, taxonomy, slug, data);
+        return this._update(transactionId, apiStartAction, data, apiUpdateUrl);
     }
 
     hotelTaxonomyLoadBySlug(apiHost, hotelId, taxonomy, slug, eagerType) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
-        const apiLoadUrl = this._buildApiHotelTaxonomyLoadBySlugUrl(apiHost, hotelId, taxonomy, slug, apiParamsStr);
+        const apiLoadUrl = this._buildApiHotelTaxonomyLoadBySlugUrl(
+            apiHost, hotelId, taxonomy, slug, apiParamsStr);
         return this._load(viewId, eagerType, apiLoadUrl);
     }
 
     hotelTaxonomyLoadMany(apiHost, hotelId, taxonomy, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadUrl = this._buildApiHotelTaxonomyLoadManyUrl(apiHost, hotelId, taxonomy, apiParamsStr);
+        const apiLoadUrl = this._buildApiHotelTaxonomyLoadManyUrl(
+            apiHost, hotelId, taxonomy, apiParamsStr);
         return this._loadMany(viewId, apiLoadUrl);
     }
 }

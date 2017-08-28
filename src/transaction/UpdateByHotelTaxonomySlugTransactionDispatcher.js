@@ -1,12 +1,14 @@
 
 import { TransactionDispatcher } from 'api-client-core';
-import UpdateBySlugTransaction from './UpdateBySlugTransaction';
+import UpdateByHotelTaxonomySlugTransaction from './UpdateByHotelTaxonomySlugTransaction';
 
-class UpdateBySlugTransactionDispatcher extends TransactionDispatcher {
+class UpdateByHotelTaxonomySlugTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
-        return new UpdateBySlugTransaction(
-            action.id, action.itemType, action.slug, action.data);
+        return new UpdateByHotelTaxonomySlugTransaction(
+            action.id, action.itemType, 
+            action.hotelId, action.taxonomy, action.slug, 
+            action.data);
     }
 
     _updateTransaction(transition, payload) {
@@ -21,4 +23,4 @@ class UpdateBySlugTransactionDispatcher extends TransactionDispatcher {
     }
 }
 
-export default UpdateTransactionDispatcher;
+export default UpdateByHotelTaxonomySlugTransactionDispatcher;
