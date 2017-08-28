@@ -51,8 +51,8 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients[itemType].loadHotelBySlug(viewId, hotelId, slug, eagerType);
     }
 
-    hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
-        return this._cacheEntryClients['term'].hotelTaxonomyInsert(transactionId, hotelId, data);
+    hotelTaxonomyTermInsertTransaction(transactionId, hotelid, taxonomy, data) {
+        return this._cacheEntryClients['term'].hotelTaxonomyInsert(transactionId, hotelId, taxonomy, data);
     }
 
     hotelTaxonomyTermUpdateTransactionBySlug(transactionId, hotelid, taxonomy, slug, data) {
