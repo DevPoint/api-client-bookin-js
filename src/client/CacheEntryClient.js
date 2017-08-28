@@ -278,6 +278,13 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._loadMany(viewId, apiLoadManyUrl);
     }
 
+    loadHotelBySlug(apiHost, hotelId, slug, eagerType) {
+        const apiHost = this._api.getHost();
+        const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
+        const apiLoadBySlugUrl = this._buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
+        return this._load(viewId, eagerType, apiLoadBySlugUrl);
+    }
+
     loadHotelMany(apiHost, hotelId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
