@@ -8,18 +8,18 @@ class BookInApi extends Api {
 
     _createCaches() {
         return {
-            'hotel': new CacheMap('hotel', true),
-            'accommodation': new CacheMap('accommodation', true),
-            'room': new CacheMap('room', true),
-            'roomprice': new CacheMap('roomprice', true),
-            'season': new CacheMap('season', true),
-            'term': new CacheMap('term', true),
-            'booking': new CacheMap('booking', true),
-            'enquiry': new CacheMap('enquiry', true),
-            'invoice': new CacheMap('invoice', true),
-            'offer': new CacheMap('offer', true),
-            'payment': new CacheMap('payment', true),
-            'user': new CacheMap('user', true),
+            'hotel': new CacheMap('hotel'),
+            'accommodation': new CacheMap('accommodation'),
+            'room': new CacheMap('room'),
+            'roomprice': new CacheMap('roomprice'),
+            'season': new CacheMap('season'),
+            'term': new CacheMap('term'),
+            'booking': new CacheMap('booking'),
+            'enquiry': new CacheMap('enquiry'),
+            'invoice': new CacheMap('invoice'),
+            'offer': new CacheMap('offer'),
+            'payment': new CacheMap('payment'),
+            'user': new CacheMap('user'),
         };
     }
 
