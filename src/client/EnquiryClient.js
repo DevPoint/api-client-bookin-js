@@ -18,6 +18,14 @@ class EnquiryClient extends CacheEntryClient {
     _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
         return `${apiHost}/hotels/${hotelId}/enquiries${paramsStr}`;
     }
+
+    _buildApiLoadBookingManyUrl(apiHost, bookingId, paramsStr) {
+        return `${apiHost}/bookings/${bookingId}/enquiries${paramsStr}`;
+    }
+
+    _buildApiLoadCustomerManyUrl(apiHost, customerId, paramsStr) {
+        return `${apiHost}/customers/${customerId}/enquiries${paramsStr}`;
+    }
 }
 
 export default EnquiryClient;

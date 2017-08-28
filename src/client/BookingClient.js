@@ -18,6 +18,10 @@ class BookingClient extends CacheEntryClient {
     _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
         return `${apiHost}/hotels/${hotelId}/bookings${paramsStr}`;
     }
+
+    _buildApiLoadCustomerManyUrl(apiHost, customerId, paramsStr) {
+        return `${apiHost}/customers/${customerId}/bookings${paramsStr}`;
+    }
 }
 
 export default BookingClient;

@@ -4,7 +4,7 @@ import http from 'axios';
 import { 
     HotelClient, TermClient, 
     AccommodationClient, RoomClient, SeasonClient,
-    BookingClient, EnquiryClient,
+    CustomerClient, BookingClient, EnquiryClient,
     InvoiceClient, OfferClient, PaymentClient,
     UserClient } from './client';
 
@@ -18,16 +18,13 @@ class BookInApiClient extends ApiClient {
             'season': new SeasonClient(api),
             'term': new TermClient(api),
             'booking': new BookingClient(api),
+            'customer': new CustomerClient(api),
             'enquiry': new EnquiryClient(api),
             'invoice': new InvoiceClient(api),
             'offer': new OfferClient(api),
             'payment': new PaymentClient(api),
             'user': new UserClient(api),
         };
-    }
-
-    loadBookingView(viewId, bookingId, builder) {
-        return this._cacheEntryClients[builder.itemType].loadBookingMany(viewId, bookingId, builder);
     }
 
     loadHotelView(viewId, hotelId, builder) {
@@ -44,6 +41,14 @@ class BookInApiClient extends ApiClient {
 
     loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
         return this._cacheEntryClients['term'].loadHotelTaxonomyBySlug(viewId, hotelId, taxonomy, slug, eagerType);
+    }
+
+    loadBookingView(viewId, bookingId, builder) {
+        return this._cacheEntryClients[builder.itemType].loadBookingMany(viewId, bookingId, builder);
+    }
+
+    loadCustomerView(viewId, customerId, builder) {
+        return this._cacheEntryClients[builder.itemType].loadCustomerMany(viewId, customerId, builder);
     }
 }
 
