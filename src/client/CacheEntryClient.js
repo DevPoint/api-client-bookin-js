@@ -123,8 +123,13 @@ class CacheEntryClient extends BaseCacheEntryClient {
     }
 
     _insert(transactionId, data, apiInsertUrl) {
-        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         this._api.dispatch(this._api.insertStart(transactionId, this._itemType, data));
+        if (!apiInsertUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.insertFailed(transactionId, ['not_implemented'], {})));
+            });
+        }
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         return http({
             method: 'POST', 
             url: apiInsertUrl, 
@@ -148,8 +153,13 @@ class CacheEntryClient extends BaseCacheEntryClient {
     }
 
     _update(transactionId, itemId, data, apiUpdateUrl) {
-        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         this._api.dispatch(this._api.updateStart(transactionId, this._itemType, itemId, data));
+        if (!apiUpdateUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {})));
+            });
+        }
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         return http({
             method: 'PUT', 
             url: apiUpdateUrl, 
@@ -172,8 +182,13 @@ class CacheEntryClient extends BaseCacheEntryClient {
     }
 
     _delete(transactionId, itemId, apiDeleteUrl) {
-        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         this._api.dispatch(this._api.deleteStart(transactionId, this._itemType, itemId));
+        if (!apiDeleteUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.deleteFailed(transactionId, ['not_implemented'])));
+            });
+        }
+        const apiHeaders = this._buildApiHeaders(this._api.getAuthToken());
         return http({
             method: 'DELETE', 
             url: apiDeleteUrl, 
@@ -199,6 +214,11 @@ class CacheEntryClient extends BaseCacheEntryClient {
             offset: 0,
             count: 1,       
             pageSize: 0}));
+        if (!apiLoadUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented'])));
+            });
+        }
         return http({
             method: 'GET', 
             url: apiLoadUrl
@@ -227,6 +247,11 @@ class CacheEntryClient extends BaseCacheEntryClient {
             offset: builder.offset,
             count: builder.count,
             pageSize: builder.pageSize}));
+        if (!apiLoadManyUrl) {
+            return new Promise((resolve, reject) => {
+                reject(this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented'])));
+            });
+        }
         return http({
             method: 'GET', 
             url: apiLoadManyUrl
