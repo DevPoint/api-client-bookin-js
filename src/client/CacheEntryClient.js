@@ -87,7 +87,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
     }
 
     _buildApiHotelUpdateBySlugUrl(apiHost, hotelId, slug) {
-        return this._buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, '');
+        return this._buildApiHotelLoadBySlugUrl(apiHost, hotelId, slug, '');
     }
 
     _buildApiInsertUrl(apiHost) {
@@ -95,7 +95,7 @@ class CacheEntryClient extends BaseCacheEntryClient {
     }
 
     _buildApiHotelInsertUrl(apiHost, hotelId) {
-        return this._buildApiLoadHotelManyUrl(apiHost, hotelId, '');
+        return this._buildApiHotelLoadManyUrl(apiHost, hotelId, '');
     }
 
     _buildApiDeleteUrl(apiHost, itemId) {
@@ -122,19 +122,19 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return '';
     }
 
-    _buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, paramsStr) {
+    _buildApiHotelLoadBySlugUrl(apiHost, hotelId, slug, paramsStr) {
         return '';
     }
 
-    _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
+    _buildApiHotelLoadManyUrl(apiHost, hotelId, paramsStr) {
         return '';
     }
 
-    _buildApiLoadBookingManyUrl(apiHost, bookingId, paramsStr) {
+    _buildApiBookingLoadManyUrl(apiHost, bookingId, paramsStr) {
         return '';
     }
 
-    _buildApiLoadCustomerManyUrl(apiHost, customerId, paramsStr) {
+    _buildApiCustomerLoadManyUrl(apiHost, customerId, paramsStr) {
         return '';
     }
 
@@ -361,31 +361,31 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._loadMany(viewId, apiLoadManyUrl);
     }
 
-    loadHotelBySlug(apiHost, hotelId, slug, eagerType) {
+    hotelLoadBySlug(apiHost, hotelId, slug, eagerType) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
-        const apiLoadBySlugUrl = this._buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
+        const apiLoadBySlugUrl = this._buildApiHotelLoadBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
         return this._load(viewId, eagerType, apiLoadBySlugUrl);
     }
 
-    loadHotelMany(apiHost, hotelId, builder) {
+    hotelLoadMany(apiHost, hotelId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiLoadHotelManyUrl(apiHost, hotelId, apiParamsStr);
+        const apiLoadManyUrl = this._buildApiHotelLoadManyUrl(apiHost, hotelId, apiParamsStr);
         return this._loadMany(viewId, apiLoadManyUrl);
     } 
 
-    loadBookingMany(apiHost, bookingId, builder) {
+    bookingLoadMany(apiHost, bookingId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiLoadBookingManyUrl(apiHost, bookingId, apiParamsStr);
+        const apiLoadManyUrl = this._buildApiBookingLoadManyUrl(apiHost, bookingId, apiParamsStr);
         return this._loadMany(viewId, apiLoadManyUrl);
     } 
     
-    loadCustomerMany(apiHost, customerId, builder) {
+    customerLoadMany(apiHost, customerId, builder) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadManyParamsStr(builder);
-        const apiLoadManyUrl = this._buildApiLoadCustomerManyUrl(apiHost, customerId, apiParamsStr);
+        const apiLoadManyUrl = this._buildApiCustomerLoadManyUrl(apiHost, customerId, apiParamsStr);
         return this._loadMany(viewId, apiLoadManyUrl);
     } 
 }

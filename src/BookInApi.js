@@ -57,20 +57,24 @@ class BookInApi extends Api {
         return this._client.hotelUpdateTransactionBySlug(transactionId, itemType, hotelid, slug, data);
     }
 
-    loadHotelView(viewId, hotelId, builder) {
-        return this._client.loadHotelView(viewId, hotelId, builder);
+    hotelLoadView(viewId, hotelId, builder) {
+        return this._client.hotelLoadView(viewId, hotelId, builder);
     }
 
-    loadHotelViewBySlug(viewId, itemType, hotelId, slug, eagerType) {
-        return this._client.loadHotelViewBySlug(viewId, itemType, hotelId, slug, eagerType);
+    hotelLoadViewBySlug(viewId, itemType, hotelId, slug, eagerType) {
+        return this._client.hotelLoadViewBySlug(viewId, itemType, hotelId, slug, eagerType);
     }
 
-    loadBookingView(viewId, bookingId, builder) {
-        return this._client.loadBookingView(viewId, bookingId, builder);
+    hotelLoadView(viewId, bookingId, builder) {
+        return this._client.hotelLoadView(viewId, bookingId, builder);
     }
 
-    loadCustomerView(viewId, customerId, builder) {
-        return this._client.loadCustomerView(viewId, customerId, builder);
+    bookingLoadView(viewId, bookingId, builder) {
+        return this._client.bookingLoadView(viewId, bookingId, builder);
+    }
+
+    customerLoadView(viewId, customerId, builder) {
+        return this._client.customerLoadView(viewId, customerId, builder);
     }
 
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {

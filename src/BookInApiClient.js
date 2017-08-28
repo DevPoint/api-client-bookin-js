@@ -35,20 +35,20 @@ class BookInApiClient extends ApiClient {
         return this._cacheEntryClients[itemType].hotelUpdateBySlug(viewId, hotelId, slug, data);
     }
 
-    loadHotelView(viewId, hotelId, builder) {
+    hotelLoadView(viewId, hotelId, builder) {
         return this._cacheEntryClients[builder.itemType].loadHotelMany(viewId, hotelId, builder);
     }
 
-    loadHotelViewBySlug(viewId, itemType, hotelId, slug, eagerType) {
+    hotelLoadViewBySlug(viewId, itemType, hotelId, slug, eagerType) {
         return this._cacheEntryClients[itemType].loadHotelBySlug(viewId, hotelId, slug, eagerType);
     }
 
-    loadBookingView(viewId, bookingId, builder) {
-        return this._cacheEntryClients[builder.itemType].loadBookingMany(viewId, bookingId, builder);
+    bookingLoadView(viewId, bookingId, builder) {
+        return this._cacheEntryClients[builder.itemType].bookingLoadMany(viewId, bookingId, builder);
     }
 
-    loadCustomerView(viewId, customerId, builder) {
-        return this._cacheEntryClients[builder.itemType].loadCustomerMany(viewId, customerId, builder);
+    customerLoadView(viewId, customerId, builder) {
+        return this._cacheEntryClients[builder.itemType].customerLoadMany(viewId, customerId, builder);
     }
 
     hotelTaxonomyTermInsertTransaction(transactionId, hotelid, data) {
