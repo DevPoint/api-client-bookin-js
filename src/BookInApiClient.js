@@ -26,22 +26,6 @@ class BookInApiClient extends ApiClient {
         };
     }
 
-    loginTransaction(transactionId, credentials) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.loginStart(transactionId, credentials));
-        this._api.dispatch(this._api.loginFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
-    }
-
-    registerTransaction(transactionId, credentials) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.registerStart(transactionId, credentials));
-        this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
-    }
-
     loadBookingView(viewId, bookingId, builder) {
         return this._cacheEntryClients[builder.itemType].loadBookingMany(viewId, bookingId, builder);
     }
