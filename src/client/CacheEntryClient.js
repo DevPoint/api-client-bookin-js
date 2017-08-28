@@ -126,6 +126,10 @@ class CacheEntryClient extends BaseCacheEntryClient {
         return this._buildApiLoadManyUrl(apiHost, '');
     }
 
+    _buildApiInsertHotelUrl(apiHost, hotelId) {
+        return this._buildApiLoadHotelManyUrl(apiHost, hotelId, '');
+    }
+
     _buildApiDeleteUrl(apiHost, itemId) {
         return this._buildApiLoadUrl(apiHost, itemId, '');
     }
@@ -282,6 +286,12 @@ class CacheEntryClient extends BaseCacheEntryClient {
     insert(transactionId, data) {
         const apiHost = this._api.getHost();
         const apiInsertUrl = this._buildApiInsertUrl(apiHost);
+        return this._insert(transactionId, data, apiInsertUrl);
+    }
+
+    hotelInsert(transactionId, hotelid, data) {
+        const apiHost = this._api.getHost();
+        const apiInsertUrl = this._buildApiInsertHotelUrl(apiHost, hotelid);
         return this._insert(transactionId, data, apiInsertUrl);
     }
 

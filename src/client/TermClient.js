@@ -27,6 +27,16 @@ class TermClient extends CacheEntryClient {
         return `${apiHost}/hotels/${hotelId}/taxonomies/${taxonomy}/terms/${slug}${paramsStr}`;
     }
 
+    _buildApiInsertHotelTaxonomyUrl(apiHost, hotelId, taxonomy) {
+        return this._buildApiLoadHotelTaxonomyManyUrl(apiHost, hotelId, taxonomy, '');
+    }
+
+    insertHotelTaxonomy(transactionId, hotelid, taxonomy, data) {
+        const apiHost = this._api.getHost();
+        const apiInsertUrl = this._buildApiInsertHotelTaxonomyUrl(apiHost, hotelid, taxonomy);
+        return this._insert(transactionId, data, apiInsertUrl);
+    }
+
     loadHotelTaxonomyBySlug(apiHost, hotelId, taxonomy, slug, eagerType) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
