@@ -35,7 +35,7 @@ class BookInApiClient extends ApiClient {
     }
 
     loadHotelViewBySlug(viewId, itemType, hotelId, slug, eagerType) {
-        return this._cacheEntryClients[itemType].loadHotel(viewId, hotelId, slug, eagerType);
+        return this._cacheEntryClients[itemType].loadHotelBySlug(viewId, hotelId, slug, eagerType);
     }
 
     loadHotelTaxonomyTermView(viewId, hotelId, taxonomy, builder) {
@@ -43,7 +43,7 @@ class BookInApiClient extends ApiClient {
     }
 
     loadHotelTaxonomyTermViewBySlug(viewId, hotelId, taxonomy, slug, eagerType) {
-        return this._cacheEntryClients['term'].loadHotelTaxonomy(viewId, hotelId, taxonomy, slug, eagerType);
+        return this._cacheEntryClients['term'].loadHotelTaxonomyBySlug(viewId, hotelId, taxonomy, slug, eagerType);
     }
 }
 
