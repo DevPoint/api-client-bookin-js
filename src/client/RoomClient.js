@@ -15,18 +15,18 @@ class RoomClient extends CacheEntryClient {
         return `${apiHost}/rooms${paramsStr}`;
     }
 
-    _buildApiLoadHotelUrl(apiHost, hotelId, slug, paramsStr) {
-        return `${apiHost}/hotels/${hotelId}/rooms/${slug}${paramsStr}`;
-    }
-
     _buildApiLoadHotelManyUrl(apiHost, hotelId, paramsStr) {
         return `${apiHost}/hotels/${hotelId}/rooms${paramsStr}`;
+    }
+
+    _buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, paramsStr) {
+        return `${apiHost}/hotels/${hotelId}/rooms/${slug}${paramsStr}`;
     }
 
     loadHotelBySlug(apiHost, hotelId, slug, eagerType) {
         const apiHost = this._api.getHost();
         const apiParamsStr = this._buildApiLoadParamsStr(itemType, eagerType);
-        const apiLoadUrl = this._buildApiLoadHotelUrl(apiHost, hotelId, slug, apiParamsStr);
+        const apiLoadUrl = this._buildApiLoadHotelBySlugUrl(apiHost, hotelId, slug, apiParamsStr);
         return this._load(viewId, eagerType, apiLoadUrl);
     }
 }
