@@ -46,7 +46,7 @@ class BookInApi extends Api {
     }
 
     updateBySlugStart(transactionId, itemType, slug, data) {
-        return transactionActions.updateBySlugStart(this.nameSpace, transactionId, slug, data);
+        return transactionActions.updateBySlugStart(this.nameSpace, transactionId, itemType, slug, data);
     }
 
 }
