@@ -1,122 +1,118 @@
 
-import { 
-    ObservablePropType,
-    ObservablePropTypes as PropTypes } from 'api-client-core';
-import PropTypes from './proptypes';
+import TransactionPropTypes from './proptypes';
 
 export default {
 
     'insert': {
-        transactionId: PropTypes.transactionId,
-        itemType: PropTypes.itemType,
-        type: PropTypes.type,
-        ready: PropTypes.ready,
-        processing: PropTypes.processing,
-        succeeded: PropTypes.succeeded,
-        failed: PropTypes.failed,
-        itemId: PropTypes.itemId,
-        data: PropTypes.data,
-        errors: PropTypes.errors,
-        validationErrors: PropTypes.validationErrors
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'insertByHotelTaxonomy': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        hotelId: PropTypes.integer,
-        taxonomy: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        itemId: PropTypes.nullableInteger,
-        data: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        hotelId: TransactionPropTypes.hotelId,
+        taxonomy: TransactionPropTypes.taxonomy,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'update': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        data: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'updateByHotelSlug': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        hotelId: PropTypes.integer,
-        slug: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        data: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        hotelId: TransactionPropTypes.hotelId,
+        slug: TransactionPropTypes.slug,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'updateByHotelTaxonomySlug': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        hotelId: PropTypes.integer,
-        taxonomy: PropTypes.string,
-        slug: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        data: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        hotelId: TransactionPropTypes.hotelId,
+        taxonomy: TransactionPropTypes.taxonomy,
+        slug: TransactionPropTypes.slug,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'delete': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        itemId: PropTypes.integer,
-        errors: PropTypes.array
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'login': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        credentials: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
     'registerByHotel': {
-        transactionId: PropTypes.string,
-        itemType: PropTypes.string,
-        type: PropTypes.string,
-        hotelId: PropTypes.integer,
-        ready: PropTypes.boolean,
-        processing: PropTypes.boolean,
-        succeeded: PropTypes.boolean,
-        failed: PropTypes.boolean,
-        credentials: PropTypes.object,
-        errors: PropTypes.array,
-        validationErrors: PropTypes.object
+        transactionId: TransactionPropTypes.transactionId,
+        itemType: TransactionPropTypes.itemType,
+        type: TransactionPropTypes.type,
+        hotelId: TransactionPropTypes.hotelId,
+        ready: TransactionPropTypes.ready,
+        processing: TransactionPropTypes.processing,
+        succeeded: TransactionPropTypes.succeeded,
+        failed: TransactionPropTypes.failed,
+        itemsIds: TransactionPropTypes.itemsIds,
+        errors: TransactionPropTypes.errors,
+        validationErrors: TransactionPropTypes.validationErrors
     },
 
 };
